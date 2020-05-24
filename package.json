@@ -1,0 +1,56 @@
+{
+  "name": "relative-goto",
+  "displayName": "relative goto",
+  "description": "Goto Relative lines",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Enkel-Digital/relative-goto.git"
+  },
+  "author": "JJ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Enkel-Digital/relative-goto/issues"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "engines": {
+    "vscode": "^1.45.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:relative-goto.goto"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "relative-goto.goto",
+        "title": "Goto relative line"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "relative-goto.goto",
+        "key": "alt+g",
+        "mac": "cmd+g"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.45.0",
+    "@types/node": "^13.11.0",
+    "eslint": "^6.8.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "typescript": "^3.8.3"
+  }
+}
