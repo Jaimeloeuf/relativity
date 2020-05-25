@@ -1,13 +1,14 @@
 {
   "name": "relative-goto",
   "displayName": "relative goto",
-  "description": "Goto Relative lines",
+  "description": "Goto / Jump to a Relative line",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Enkel-Digital/relative-goto.git"
+    "url": "https://github.com/Enkel-Digital/relative-goto.git"
   },
   "author": "JJ",
+  "publisher": "EnkelDigital",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Enkel-Digital/relative-goto/issues"
@@ -23,8 +24,20 @@
   "engines": {
     "vscode": "^1.45.0"
   },
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "theme": "light",
+    "color": "#ffa600"
+  },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "shortcuts",
+    "relative",
+    "goto",
+    "lines",
+    "jump"
   ],
   "activationEvents": [
     "onCommand:relative-goto.goto"

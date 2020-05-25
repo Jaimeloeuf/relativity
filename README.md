@@ -1,4 +1,4 @@
-# relative-goto README
+# relative-goto
 Visual Studio Code extension "relative-goto" allows you to jump to lines relative to the current line. Recommended to use together with the relative line settings in VS code.
 
 ## Features
@@ -21,6 +21,7 @@ This extension contributes the following settings:
 -- NIL --
 
 ## Roadmap
+- [ ] On activate / install, change settings so that the lines type is relative lines already.
 - [ ] Add highlight to line on type before jumping to preview jump destination
 - [ ] Bundle project to reduce size
 - [ ] Optimize import to only impot what is needed from vs code lib
@@ -35,6 +36,6 @@ Initial release.
 ---
 ## License, Author and Contributing
 This project is developed and made available under the "MIT License". Feel free to use it however you like!  
-If you have any questions, contact us via [email](mailto:tech@enkeldigital.com)  
+If you have any questions, contact us via via at tech@enkeldigital.com  
 Authors:
 - [JJ](https://github.com/Jaimeloeuf)
