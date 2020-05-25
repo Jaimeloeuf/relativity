@@ -23,7 +23,7 @@ This extension contributes the following settings:
 -- NIL --
 
 ## Roadmap
-- [ ] Add highlight to line on type before jumping to preview jump destination
+- [ ] Show highlight/preview of line on type before jumping to preview the jump destination
 - [ ] Bundle project to reduce size
 - [ ] Optimize import to only impot what is needed from vs code lib
     - Use typings file for reference
@@ -31,6 +31,11 @@ This extension contributes the following settings:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.3.1
+- Bug fix for gotos when there is a text selection.
+    - Previously, the jump used the "end" position of the text selection to jump, this is an issue when there is a bottom -> up text selection, as it will jump below the bottom selection.
+    - Now, jump has been changed to use "active" position of selection as the anchor to jump, allowing true relative line number jumping based on current cursor position even if there is a text selection.
+
 ### 0.3.0
 - Updated range scrolling to only scroll/shift if the new position is out of visible range or in the scrollOff region.
 

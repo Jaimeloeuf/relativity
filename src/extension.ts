@@ -58,9 +58,10 @@ export async function activate(context: vscode.ExtensionContext) {
       const editor: vscode.TextEditor = vscode.window.activeTextEditor!;
 
       // Create new position object by applying relative jump while maintaining same character position
+      // Use the active position of selection instead of anchor/start/end to move based on current cursor line
       const newPosition: vscode.Position = new vscode.Position(
-        editor.selection.end.line + newLine,
-        editor.selection.end.character
+        editor.selection.active.line + newLine,
+        editor.selection.active.character
       );
 
       // Create new selection object where the start and end positions are the same, to make it a singular cursor movement
