@@ -4,11 +4,36 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
+async function setup() {
+  // Get the configuration/settings
+  const configuration = vscode.workspace.getConfiguration();
+
+  // Get the current settings for editor.lineNumbers
+  const initialSetting = configuration.get("editor.lineNumbers");
+
+  // If the current setting is not using relative line numbers,
+  // Update global settings to change line numbers use relative numbers
+  if (initialSetting !== "relative") {
+    await vscode.workspace
+      .getConfiguration()
+      .update(
+        "editor.lineNumbers",
+        "relative",
+        vscode.ConfigurationTarget.Global
+      );
+    console.log(
+      "Updated 'editor.lineNumbers' settings to: ",
+      vscode.workspace.getConfiguration().get("editor.lineNumbers")
+    );
+  }
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
+  // These code will only be executed once when your extension is activated
+  await setup();
   console.log("Congratulations, your extension 'relative-goto' is now active!");
 
   // The command has been defined in the package.json file
@@ -58,4 +83,6 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+  // No clean up code required for this extension
+}
