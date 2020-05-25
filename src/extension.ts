@@ -72,10 +72,17 @@ export async function activate(context: vscode.ExtensionContext) {
       // Set the new selection to move the cursor
       editor.selection = newSelection;
 
-      // Create a new range that is a singular position based on newPosition/jump-destination
-      const newRange: vscode.Range = new vscode.Range(newPosition, newPosition);
-      // Move the editor's visible range to the newRange and scroll jump destination to center of editor
-      editor.revealRange(newRange, vscode.TextEditorRevealType.InCenter);
+      // If the new position is out of the editor's top and bottom visible range
+      // Move the visible range to show the new position at the center of the editor
+      if (!editor.visibleRanges[0].contains(newPosition)) {
+        // Create a new range that is a singular position based on newPosition/jump-destination
+        const newRange: vscode.Range = new vscode.Range(
+          newPosition,
+          newPosition
+        );
+        // Move the editor's visible range to the newRange and scroll jump destination to center of editor
+        editor.revealRange(newRange, vscode.TextEditorRevealType.InCenter);
+      }
     }
   );
 

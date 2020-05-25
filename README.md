@@ -6,6 +6,8 @@ Visual Studio Code extension "relative-goto" allows you to jump to lines relativ
     - Positive numbers to jump down
     - Negative numbers to jump up
 - Keeps the current character number when jumping
+- On extension activation, change settings to ensure that lines numbers settings uses relative lines.
+- Scroll / shift visible range to new position if the new position is out of visible range or if new position is the 'scrollOff' region.
 
 ## Requirements
 <!-- If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
@@ -21,7 +23,6 @@ This extension contributes the following settings:
 -- NIL --
 
 ## Roadmap
-- [ ] On activate / install, change settings so that the lines type is relative lines already.
 - [ ] Add highlight to line on type before jumping to preview jump destination
 - [ ] Bundle project to reduce size
 - [ ] Optimize import to only impot what is needed from vs code lib
@@ -30,6 +31,12 @@ This extension contributes the following settings:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.3.0
+- Updated range scrolling to only scroll/shift if the new position is out of visible range or in the scrollOff region.
+
+### 0.2.0
+- Setup function to ensure line numbers settings uses relative line numbers.
+
 ### 0.1.0
 Initial release.
 
