@@ -52,15 +52,20 @@ export async function activate(context: vscode.ExtensionContext) {
       // End if input box closed after losing focus
       if (input === undefined) return;
       // Convert input from string to number
-      const newLine = parseInt(input);
+      const linesToJump = parseInt(input);
 
       // Get the current editor and assume it will not be undefined
       const editor: vscode.TextEditor = vscode.window.activeTextEditor!;
 
+      // Use active position of selection instead of "anchor/start/end" to move based on current cursor line
+      let newLine = editor.selection.active.line + linesToJump;
+      // If newLine exceeds upper screen/document limit of line 0, reset the newLine value to 0
+      if (newLine < 0) newLine = 0;
+      // If newLine exceeds lower screen/document limit, vscode will just jump to last line, last character.
+
       // Create new position object by applying relative jump while maintaining same character position
-      // Use the active position of selection instead of anchor/start/end to move based on current cursor line
       const newPosition: vscode.Position = new vscode.Position(
-        editor.selection.active.line + newLine,
+        newLine,
         editor.selection.active.character
       );
 

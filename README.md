@@ -25,12 +25,17 @@ This extension contributes the following settings:
 ## Roadmap
 - [ ] Show highlight/preview of line on type before jumping to preview the jump destination
 - [ ] Bundle project to reduce size
-- [ ] Optimize import to only impot what is needed from vs code lib
+- [ ] Optimize import to only import what is needed from vs code lib
     - Use typings file for reference
     - e.g. use position.translate instead of creating a new position object
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.3.2
+- Bug fix for gotos jumping up, that exceeds upper document/screen limit of line 0
+    - Previously, this will fail with an error of illegal position as a line cannot be negative.
+    - Now, line will jump to the first line (line 0) and maintain the same character position if available.
+
 ### 0.3.1
 - Bug fix for gotos when there is a text selection.
     - Previously, the jump used the "end" position of the text selection to jump, this is an issue when there is a bottom -> up text selection, as it will jump below the bottom selection.
