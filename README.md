@@ -1,11 +1,15 @@
 # relative-goto
-Visual Studio Code extension "relative-goto" allows you to jump to lines relative to the current line. Recommended to use together with the relative line settings in VS code.
+Visual Studio Code extension "relative-goto" allows you to jump to lines relative to the current line and select them if you wish.  
+Should be used together with relative line numbers setting in VS code.
 
 ## Features
 - Jumps up and down in the same editor using relative line numbers as shown by relative line settings in vs code.
     - Positive numbers to jump down
     - Negative numbers to jump up
-- Keeps the current character number when jumping
+- Select text using relative line jumping!
+    - Built on top of relative line jump, and the input works the same way.
+    - Allows you to select a block of text without using your mouse or touchpad by programmatically selecting from your current cursor position to the relative line jump position!
+- Keeps the current character number when jumping / selecting
 - On extension activation, change settings to ensure that lines numbers settings uses relative lines.
 - Scroll / shift visible range to new position if the new position is out of visible range or if new position is the 'scrollOff' region.
 - Changes editor.lineNumbers settings on activation to use relative line numbers.
@@ -26,8 +30,7 @@ This extension contributes the following settings:
 
 ## Roadmap
 - [ ] Add pictures/gif showing how to use the extension
-- [ ] Use relative line jumping to select text.
-- [ ] Implement character jump. So, allow inputs like  20:30 --> line 20 char 30, where char cannot be negative.
+- [ ] Implement character jump. So, allow inputs like  20:30 --> line 20 char 30, where char cannot be negative. If negative, will count from backwards?
 - [ ] Show highlight/preview of line on type before jumping to preview the jump destination
 - [ ] Bundle project to reduce size
 - [ ] Optimize import to only import what is needed from vs code lib
@@ -36,6 +39,10 @@ This extension contributes the following settings:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.4.0
+- New Feature release: Select text using relative line jumping!
+    - Allows you to select a block of text without using your mouse or touchpad by selecting from current cursor position to relative line jump position!
+
 ### 0.3.3
 - Refactored internal code to extract some code blocks into standalone functions, for better future extensibility.
 

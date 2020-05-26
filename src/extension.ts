@@ -128,7 +128,41 @@ export async function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  const registeredCommandSelect = vscode.commands.registerCommand(
+    "relative-goto.select",
+    async () => {
+      // Get input from user
+      const input: string | undefined = await vscode.window.showInputBox({
+        placeHolder: "Relative number of lines to select",
+        prompt: "Select using relative lines",
+      });
+      // End if input box closed after losing focus
+      if (input === undefined) return;
+      // Convert input from string to number
+      const { linesToJump } = parseInput(input);
+
+      // Get the current editor and assume it will not be undefined
+      const editor: vscode.TextEditor = vscode.window.activeTextEditor!;
+
+      const newPosition = createNewPosition(editor, linesToJump);
+
+      // Create new selection object where the start and end positions are the same, to make it a singular cursor movement
+      const newSelection: vscode.Selection = new vscode.Selection(
+        // @todo Make this user configurable. But by default, include what is already selected using anchor position.
+        editor.selection.anchor, // Keep what is already selected if any
+        newPosition
+      );
+
+      // Set new selection onto current text editor
+      editor.selection = newSelection;
+
+      // Shifts visible range if needed
+      shiftVisibleRange(editor, newPosition);
+    }
+  );
+
   context.subscriptions.push(registeredCommandGoto);
+  context.subscriptions.push(registeredCommandSelect);
 }
 
 // this method is called when your extension is deactivated

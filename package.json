@@ -2,7 +2,7 @@
   "name": "relative-goto",
   "displayName": "relative goto",
   "description": "Goto / Jump to a Relative line",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Enkel-Digital/relative-goto.git"
@@ -40,7 +40,8 @@
     "jump"
   ],
   "activationEvents": [
-    "onCommand:relative-goto.goto"
+    "onCommand:relative-goto.goto",
+    "onCommand:relative-goto.select"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -48,6 +49,10 @@
       {
         "command": "relative-goto.goto",
         "title": "Goto relative line"
+      },
+      {
+        "command": "relative-goto.select",
+        "title": "Select using relative line Goto/Jump"
       }
     ],
     "keybindings": [
@@ -55,6 +60,11 @@
         "command": "relative-goto.goto",
         "key": "alt+g",
         "mac": "cmd+g"
+      },
+      {
+        "command": "relative-goto.select",
+        "key": "alt+s",
+        "mac": "cmd+s"
       }
     ]
   },
