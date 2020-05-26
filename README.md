@@ -31,7 +31,6 @@ This extension contributes the following settings:
 ## Roadmap
 - [ ] Add pictures/gif showing how to use the extension
 - [ ] Implement character jump. So, allow inputs like  20:30 --> line 20 char 30, where char cannot be negative. If negative, will count from backwards?
-- [ ] Show highlight/preview of line on type before jumping to preview the jump destination
 - [ ] Bundle project to reduce size
 - [ ] Optimize import to only import what is needed from vs code lib
     - Use typings file for reference
@@ -39,6 +38,12 @@ This extension contributes the following settings:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.5.0
+- New Feature release: Preview jump destination
+    - Highlights the line containing the final cursor destination after jump to allow you to preview the destination.
+- Added input validation to prevent invalid inputs.
+- Cleaned up some code and added minor changes such as showing info box when extension is activated.
+
 ### 0.4.0
 - New Feature release: Select text using relative line jumping!
     - Allows you to select a block of text without using your mouse or touchpad by selecting from current cursor position to relative line jump position!

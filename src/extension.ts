@@ -81,6 +81,68 @@ function shiftVisibleRange(
     // Move the editor's visible range to the newRange and scroll jump destination to center of editor
     editor.revealRange(newRange, vscode.TextEditorRevealType.InCenter);
   }
+
+}
+
+/**
+ * Decoration for highlighting a line to preview the jump destination.
+ */
+const lineHighlight: vscode.TextEditorDecorationType = vscode.window.createTextEditorDecorationType(
+  {
+    isWholeLine: true,
+    borderColor: new vscode.ThemeColor("editor.lineHighlightBorder"),
+    borderWidth: "2px",
+    borderStyle: "solid",
+    backgroundColor: new vscode.ThemeColor("editor.lineHighlightBackground"),
+  }
+);
+
+/**
+ * Deletes all highlights in the editor that matches the highlight pattern.
+ * @function deleteHighlight
+ * @param editor the current active text editor
+ */
+function deleteHighlight(editor: vscode.TextEditor) {
+  editor.setDecorations(lineHighlight, []);
+}
+
+/**
+ * Used to generate inner peekline function with editor argument in its closure
+ * @function newPeekline
+ * @param editor the current active text editor
+ */
+function newPeekline(editor: vscode.TextEditor) {
+  /**
+   * Input validation function, that is used to validate input and show preview of the jump destination.
+   * @function peekline
+   */
+  function peekline(
+    inputValue: string
+  ): string | undefined | null | Thenable<string | undefined | null> {
+    // Delete the highlight first before parsing input value
+    deleteHighlight(editor);
+
+    // If input value is bad, show error diagnostic message back
+    if (isNaN(Number(inputValue))) return "Invalid input";
+
+    // Convert input from string to number
+    const { linesToJump } = parseInput(inputValue);
+
+    // Ensure linesToJump is not 0 before highlighting to prevent highlighting current line.
+    if (linesToJump) {
+      const newPosition = createNewPosition(editor, linesToJump);
+
+      // Show line highlight to let user preview the jump destination
+      editor.setDecorations(lineHighlight, [
+        new vscode.Range(newPosition, newPosition),
+      ]);
+    }
+
+    // Return undefined to indicate no issues with input value
+    return;
+  }
+
+  return peekline;
 }
 
 // this method is called when your extension is activated
@@ -89,7 +151,9 @@ export async function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // These code will only be executed once when your extension is activated
   await setup();
-  console.log("Congratulations, your extension 'relative-goto' is now active!");
+  vscode.window.showInformationMessage(
+    "Congratulations, your extension 'relative-goto' is now active!"
+  );
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
@@ -97,21 +161,28 @@ export async function activate(context: vscode.ExtensionContext) {
   const registeredCommandGoto = vscode.commands.registerCommand(
     "relative-goto.goto",
     async () => {
-      // The code you place here will be executed every time your command is executed
+      // Get the current editor
+      const editor: vscode.TextEditor | undefined =
+        vscode.window.activeTextEditor;
+
+      // If the current editor is undefined (meaning user focus not on a editor), just ignore the command
+      if (!editor) return;
 
       // Get input from user
       const input: string | undefined = await vscode.window.showInputBox({
-        placeHolder: "Relative number of lines to jump",
-        prompt: "Jump using relative lines",
+        value: "0",
+        prompt: "Jump using relative number of lines",
+        validateInput: newPeekline(editor),
       });
-      // End if input box closed after losing focus
-      if (input === undefined) return;
+      // End if input box closed after losing focus or if user pressed esc or if user pressed enter with no input
+      if (input === undefined || input === "") return;
       // Convert input from string to number
       const { linesToJump } = parseInput(input);
 
-      // Get the current editor and assume it will not be undefined
-      const editor: vscode.TextEditor = vscode.window.activeTextEditor!;
+      // Delete the highlight generated in preview function
+      deleteHighlight(editor);
 
+      // Create the new end position using linesToJump
       const newPosition = createNewPosition(editor, linesToJump);
 
       // Create new selection object where the start and end positions are the same, to make it a singular cursor movement
@@ -131,18 +202,26 @@ export async function activate(context: vscode.ExtensionContext) {
   const registeredCommandSelect = vscode.commands.registerCommand(
     "relative-goto.select",
     async () => {
+      // Get the current editor
+      const editor: vscode.TextEditor | undefined =
+        vscode.window.activeTextEditor;
+
+      // If the current editor is undefined (meaning user focus not on a editor), just ignore the command
+      if (!editor) return;
+
       // Get input from user
       const input: string | undefined = await vscode.window.showInputBox({
-        placeHolder: "Relative number of lines to select",
-        prompt: "Select using relative lines",
+        value: "0",
+        prompt: "Select using relative number of lines",
+        validateInput: newPeekline(editor),
       });
-      // End if input box closed after losing focus
-      if (input === undefined) return;
+      // End if input box closed after losing focus or if user pressed esc or if user pressed enter with no input
+      if (input === undefined || input === "") return;
       // Convert input from string to number
       const { linesToJump } = parseInput(input);
 
-      // Get the current editor and assume it will not be undefined
-      const editor: vscode.TextEditor = vscode.window.activeTextEditor!;
+      // Delete the highlight generated in preview function
+      deleteHighlight(editor);
 
       const newPosition = createNewPosition(editor, linesToJump);
 
