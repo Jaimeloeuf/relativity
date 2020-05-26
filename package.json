@@ -2,7 +2,7 @@
   "name": "relative-goto",
   "displayName": "relative goto",
   "description": "Goto / Jump to a Relative line",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/Enkel-Digital/relative-goto.git"
