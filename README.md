@@ -38,6 +38,16 @@ This extension contributes the following settings:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.5.2
+- New Feature: Move editor's view port when previewing jump destination
+    - Move view port to show jump destination in center of view port if the previewed jump destination is out of current visible range.
+- Bug fix for sticky highlighting after preview and operation cancelled
+    - Fixed bad code sequences that caused this.
+- Bug fix for editor not shifting view port back to original position even after preview and operation cancelled.
+    - Added new viewPort shift to do this.
+    - *However, this does not shift back to the same visible range, this only shifts visible range so that the active cursor is revealed in the center of the view port.
+        - Might have a fix for this in the future.
+
 ### 0.5.1
 - Code refactor, refactored out functions from extension.ts into individual modules
 

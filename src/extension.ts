@@ -10,28 +10,6 @@ import shiftVisibleRange from "./shiftVisibleRange";
 import deleteHighlight from "./deleteHighlight";
 import newPeekline from "./newPeekline";
 
-/**
- * Decoration for highlighting a line to preview the jump destination.
- */
-const lineHighlight: vscode.TextEditorDecorationType = vscode.window.createTextEditorDecorationType(
-  {
-    isWholeLine: true,
-    borderColor: new vscode.ThemeColor("editor.lineHighlightBorder"),
-    borderWidth: "2px",
-    borderStyle: "solid",
-    backgroundColor: new vscode.ThemeColor("editor.lineHighlightBackground"),
-  }
-);
-
-/**
- * Deletes all highlights in the editor that matches the highlight pattern.
- * @function deleteHighlight
- * @param editor the current active text editor
- */
-function deleteHighlight(editor: vscode.TextEditor) {
-  editor.setDecorations(lineHighlight, []);
-}
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
@@ -61,13 +39,22 @@ export async function activate(context: vscode.ExtensionContext) {
         prompt: "Jump using relative number of lines",
         validateInput: newPeekline(editor),
       });
+      // Delete highlight generated in preview function
+      deleteHighlight(editor);
+
       // End if input box closed after losing focus or if user pressed esc or if user pressed enter with no input
-      if (input === undefined || input === "") return;
+      if (input === undefined || input === "") {
+        // Replace visible range/viewPort with how it was before the preview
+        editor.revealRange(
+          new vscode.Range(editor.selection.active, editor.selection.active),
+          vscode.TextEditorRevealType.InCenterIfOutsideViewport
+        );
+
+        return;
+      }
+
       // Convert input from string to number
       const { linesToJump } = parseInput(input);
-
-      // Delete the highlight generated in preview function
-      deleteHighlight(editor);
 
       // Create the new end position using linesToJump
       const newPosition = createNewPosition(editor, linesToJump);
@@ -102,13 +89,22 @@ export async function activate(context: vscode.ExtensionContext) {
         prompt: "Select using relative number of lines",
         validateInput: newPeekline(editor),
       });
+      // Delete highlight generated in preview function
+      deleteHighlight(editor);
+
       // End if input box closed after losing focus or if user pressed esc or if user pressed enter with no input
-      if (input === undefined || input === "") return;
+      if (input === undefined || input === "") {
+        // Replace visible range/viewPort with how it was before the preview
+        editor.revealRange(
+          new vscode.Range(editor.selection.active, editor.selection.active),
+          vscode.TextEditorRevealType.InCenterIfOutsideViewport
+        );
+
+        return;
+      }
+
       // Convert input from string to number
       const { linesToJump } = parseInput(input);
-
-      // Delete the highlight generated in preview function
-      deleteHighlight(editor);
 
       const newPosition = createNewPosition(editor, linesToJump);
 
