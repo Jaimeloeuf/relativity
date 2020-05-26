@@ -38,6 +38,9 @@ This extension contributes the following settings:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.5.1
+- Code refactor, refactored out functions from extension.ts into individual modules
+
 ### 0.5.0
 - New Feature release: Preview jump destination
     - Highlights the line containing the final cursor destination after jump to allow you to preview the destination.
