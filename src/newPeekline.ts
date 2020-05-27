@@ -25,27 +25,29 @@ function newPeekline(editor: vscode.TextEditor) {
     if (isNaN(Number(inputValue))) {
       return "Invalid input";
     }
+
     // Convert input from string to number
     const { linesToJump } = parseInput(inputValue);
 
+    // Create new position/jump destination from user's input
+    const newPosition = createNewPosition(editor, linesToJump);
+
     // Ensure linesToJump is not 0 before highlighting to prevent highlighting current line.
     if (linesToJump) {
-      const newPosition = createNewPosition(editor, linesToJump);
-
       // Show line highlight to let user preview the jump destination
       editor.setDecorations(lineHighlight, [
         new vscode.Range(newPosition, newPosition),
       ]);
+    }
 
-      // If the new position is out of the editor's top and bottom visible range
-      // Move the visible range to show the new position at the center of the editor
-      if (!editor.visibleRanges[0].contains(newPosition)) {
-        // Move editor's visible range to put jump destination at the center of the editor if out of viewport
-        editor.revealRange(
-          new vscode.Range(newPosition, newPosition),
-          vscode.TextEditorRevealType.InCenterIfOutsideViewport
-        );
-      }
+    // If new position is out of editor's top and bottom visible range
+    // Move visible range to show new position in the center of the editor
+    if (!editor.visibleRanges[0].contains(newPosition)) {
+      // Move editor's visible range to put jump destination at the center of the editor if out of viewport
+      editor.revealRange(
+        new vscode.Range(newPosition, newPosition),
+        vscode.TextEditorRevealType.InCenterIfOutsideViewport
+      );
     }
 
     // Return undefined to indicate no issues with input value

@@ -17,7 +17,7 @@ Should be used together with relative line numbers setting in VS code.
 
 ## Requirements
 <!-- If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
--- NIL
+-- NIL --
 
 ## Extension Settings
 Any VS Code settings through the `contributes.configuration` extension point.  
@@ -27,6 +27,12 @@ This extension contributes the following settings:
 ## Known Issues
 <!-- Calling out known issues can help limit users opening duplicate issues against your extension. -->
 -- NIL --
+
+## License, Author and Contributing
+This project is developed and made available under the "MIT License". Feel free to use it however you like and contribute changes to build on top of it!  
+If you have any questions, contact us via via at tech@enkeldigital.com  
+Authors:
+- [JJ](https://github.com/Jaimeloeuf)
 
 ## Roadmap
 - [ ] Add pictures/gif showing how to use the extension
@@ -38,6 +44,11 @@ This extension contributes the following settings:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.5.3
+- Bug fix, reset view port back with original line in view port if user cleared input box.
+    - Previously, if user cleared the input box without pressing enter or escape, the view port will just stay at the last previewed jump destination and not go back to where the cursor (editor active position) is.
+    - Now, if input is cleared, view port will be scrolled back to show editor active position if the position is out of visible range.
+
 ### 0.5.2
 - New Feature: Move editor's view port when previewing jump destination
     - Move view port to show jump destination in center of view port if the previewed jump destination is out of current visible range.
@@ -82,10 +93,3 @@ This extension contributes the following settings:
 
 ### 0.1.0
 Initial release.
-
----
-## License, Author and Contributing
-This project is developed and made available under the "MIT License". Feel free to use it however you like!  
-If you have any questions, contact us via via at tech@enkeldigital.com  
-Authors:
-- [JJ](https://github.com/Jaimeloeuf)
