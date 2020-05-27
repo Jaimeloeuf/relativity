@@ -6,6 +6,7 @@ Should be used together with relative line numbers setting in VS code.
 - Jumps up and down in the same editor using relative line numbers as shown by relative line settings in vs code.
     - Positive numbers to jump down
     - Negative numbers to jump up
+- Preview jump destination with line highlighting and editor will scroll to show line if jump destination is out of visible range
 - Select text using relative line jumping!
     - Built on top of relative line jump, and the input works the same way.
     - Allows you to select a block of text without using your mouse or touchpad by programmatically selecting from your current cursor position to the relative line jump position!
@@ -13,7 +14,7 @@ Should be used together with relative line numbers setting in VS code.
 - On extension activation, change settings to ensure that lines numbers settings uses relative lines.
 - Scroll / shift visible range to new position if the new position is out of visible range or if new position is the 'scrollOff' region.
 - Changes editor.lineNumbers settings on activation to use relative line numbers.
-- On activation, auto saves global keybinding of "Alt+g" or "Cmd+g" to trigger relative-goto.goto command to open the input box.
+- On activation, auto saves/set the keybinding for all the commands
 
 ## Requirements
 <!-- If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
@@ -37,6 +38,7 @@ Authors:
 ## Roadmap
 - [ ] Add pictures/gif showing how to use the extension
 - [ ] Implement character jump. So, allow inputs like  20:30 --> line 20 char 30, where char cannot be negative. If negative, will count from backwards?
+- [ ] Implement cursor insertion using relative line numbers
 - [ ] Bundle project to reduce size
 - [ ] Optimize import to only import what is needed from vs code lib
     - Use typings file for reference
