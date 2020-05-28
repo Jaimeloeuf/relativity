@@ -1,5 +1,3 @@
-/*eslint curly: off*/
-
 // The module 'vscode' contains the VS Code extensibility API
 import * as vscode from "vscode";
 
@@ -15,10 +13,9 @@ import newPeekline from "./newPeekline";
 export async function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // These code will only be executed once when your extension is activated
-  await setup();
-  vscode.window.showInformationMessage(
-    "Congratulations, your extension 'relative-goto' is now active!"
-  );
+
+  // Not awaiting to prevent this from blocking / delaying command registration
+  setup();
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand

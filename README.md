@@ -15,6 +15,7 @@ Should be used together with relative line numbers setting in VS code.
 - Scroll / shift visible range to new position if the new position is out of visible range or if new position is the 'scrollOff' region.
 - Changes editor.lineNumbers settings on activation to use relative line numbers.
 - On activation, auto saves/set the keybinding for all the commands
+- Extension activated on vscode startup using the "*" activation event.
 
 ## Requirements
 <!-- If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
@@ -46,6 +47,10 @@ Authors:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.5.4
+- Updated extension to activate on vscode startup using the "*" activation event
+- Updated setup function call to not await it to prevent blocking / taking too long for command to be registered on startup.
+
 ### 0.5.3
 - Bug fix, reset view port back with original line in view port if user cleared input box.
     - Previously, if user cleared the input box without pressing enter or escape, the view port will just stay at the last previewed jump destination and not go back to where the cursor (editor active position) is.
