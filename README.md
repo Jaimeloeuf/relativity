@@ -1,5 +1,5 @@
-# relative-goto
-Visual Studio Code extension "relative-goto" allows you to jump to lines relative to the current line and select them if you wish.  
+# relativity
+Visual Studio Code extension "relativity" allows you to jump to lines relative to the current line and select them if you wish.  
 Should be used together with relative line numbers setting in VS code.
 
 ## Features
@@ -24,7 +24,7 @@ Should be used together with relative line numbers setting in VS code.
 ## Extension Settings
 Any VS Code settings through the `contributes.configuration` extension point.  
 This extension contributes the following settings:
-* `relative-goto.enable`: enable/disable this extension
+* `relativity.enable`: enable/disable this extension
 
 ## Known Issues
 <!-- Calling out known issues can help limit users opening duplicate issues against your extension. -->
@@ -47,6 +47,10 @@ Authors:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.6.0
+- Renamed extension to "relativity" from "relative-goto"!
+- Added new publish script to help with publishing to the market place
+
 ### 0.5.4
 - Updated extension to activate on vscode startup using the "*" activation event
 - Updated setup function call to not await it to prevent blocking / taking too long for command to be registered on startup.

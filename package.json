@@ -1,23 +1,24 @@
 {
-  "name": "relative-goto",
-  "displayName": "relative goto",
-  "description": "Goto / Jump to a Relative line",
-  "version": "0.5.4",
+  "name": "relativity",
+  "displayName": "relativity",
+  "description": "Shortcut commands to Goto/Select and more using Relative lines",
+  "version": "0.6.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Enkel-Digital/relative-goto.git"
+    "url": "https://github.com/Enkel-Digital/relativity.git"
   },
   "author": "JJ",
   "publisher": "EnkelDigital",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Enkel-Digital/relative-goto/issues"
+    "url": "https://github.com/Enkel-Digital/relativity/issues"
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "watch": "tsc -watch -p ./",
+    "publish": "git stash --include-untracked && vsce publish && git stash apply",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js"
   },
@@ -41,29 +42,29 @@
   ],
   "activationEvents": [
     "*",
-    "onCommand:relative-goto.goto",
-    "onCommand:relative-goto.select"
+    "onCommand:relativity.goto",
+    "onCommand:relativity.select"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "relative-goto.goto",
+        "command": "relativity.goto",
         "title": "Goto relative line"
       },
       {
-        "command": "relative-goto.select",
+        "command": "relativity.select",
         "title": "Select using relative line Goto/Jump"
       }
     ],
     "keybindings": [
       {
-        "command": "relative-goto.goto",
+        "command": "relativity.goto",
         "key": "alt+g",
         "mac": "cmd+g"
       },
       {
-        "command": "relative-goto.select",
+        "command": "relativity.select",
         "key": "alt+s",
         "mac": "cmd+s"
       }
