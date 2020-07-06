@@ -47,6 +47,9 @@ Authors:
 - [ ] Add settings to allow customization of jump style and default character position after jump
 
 ## Release Notes
+### 0.6.1
+- Fixed really stupid mac keybinding mistake. Will no longer conflict with save anymore.
+
 ### 0.6.0
 - Renamed extension to "relativity" from "relative-goto"!
 - Added new publish script to help with publishing to the market place

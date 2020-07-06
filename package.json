@@ -2,7 +2,7 @@
   "name": "relativity",
   "displayName": "relativity",
   "description": "Shortcut commands to Goto/Select and more using Relative lines",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Enkel-Digital/relativity.git"
@@ -60,13 +60,11 @@
     "keybindings": [
       {
         "command": "relativity.goto",
-        "key": "alt+g",
-        "mac": "cmd+g"
+        "key": "alt+g"
       },
       {
         "command": "relativity.select",
-        "key": "alt+s",
-        "mac": "cmd+s"
+        "key": "alt+s"
       }
     ]
   },
