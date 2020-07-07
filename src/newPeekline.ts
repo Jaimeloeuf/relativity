@@ -26,10 +26,10 @@ function newPeekline(editor: vscode.TextEditor) {
     if (!validateInput(inputValue)) return "Invalid input";
 
     // Convert input from string to number
-    const { linesToJump } = parseInput(inputValue);
+    const { linesToJump, charactersToJump } = parseInput(inputValue);
 
     // Create new position/jump destination from user's input
-    const newPosition = createNewPosition(editor, linesToJump);
+    const newPosition = createNewPosition(editor, linesToJump, charactersToJump);
 
     // Ensure linesToJump is not 0 before highlighting to prevent highlighting current line.
     if (linesToJump) {

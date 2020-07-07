@@ -50,11 +50,15 @@ export async function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      // Convert input from string to number
-      const { linesToJump } = parseInput(input);
+      // Get lines to jump and characters to jump from input
+      const { linesToJump, charactersToJump } = parseInput(input);
 
       // Create the new end position using linesToJump
-      const newPosition = createNewPosition(editor, linesToJump);
+      const newPosition = createNewPosition(
+        editor,
+        linesToJump,
+        charactersToJump
+      );
 
       // Create new selection object where the start and end positions are the same, to make it a singular cursor movement
       const newSelection: vscode.Selection = new vscode.Selection(
@@ -100,10 +104,15 @@ export async function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      // Convert input from string to number
-      const { linesToJump } = parseInput(input);
+      // Get lines to jump and characters to jump from input
+      const { linesToJump, charactersToJump } = parseInput(input);
 
-      const newPosition = createNewPosition(editor, linesToJump);
+      // Create the new end position using linesToJump
+      const newPosition = createNewPosition(
+        editor,
+        linesToJump,
+        charactersToJump
+      );
 
       // Create new selection object where the start and end positions are the same, to make it a singular cursor movement
       const newSelection: vscode.Selection = new vscode.Selection(
