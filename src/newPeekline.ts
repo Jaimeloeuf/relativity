@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 
+import validateInput from "./validateInput";
 import parseInput from "./parseInput";
 import createNewPosition from "./createNewPosition";
 import lineHighlight from "./lineHighlight";
@@ -12,7 +13,7 @@ import deleteHighlight from "./deleteHighlight";
  */
 function newPeekline(editor: vscode.TextEditor) {
   /**
-   * Input validation function, that is used to validate input and show preview of the jump destination.
+   * Used as the Input validation function, that is used to both validate input and show preview of the jump destination.
    * @function peekline
    */
   function peekline(
@@ -21,10 +22,8 @@ function newPeekline(editor: vscode.TextEditor) {
     // Delete the highlight first before parsing input value
     deleteHighlight(editor);
 
-    // If input value is bad, show error diagnostic message back
-    if (isNaN(Number(inputValue))) {
-      return "Invalid input";
-    }
+    // If input value is invalid, end function and return error diagnostic message
+    if (!validateInput(inputValue)) return "Invalid input";
 
     // Convert input from string to number
     const { linesToJump } = parseInput(inputValue);
