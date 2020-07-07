@@ -17,9 +17,11 @@ async function setup() {
         "relative",
         vscode.ConfigurationTarget.Global
       );
-    console.log(
-      "Updated 'editor.lineNumbers' settings to: ",
-      vscode.workspace.getConfiguration().get("editor.lineNumbers")
+    vscode.window.setStatusBarMessage(
+      `Updated 'editor.lineNumbers' settings to: ${vscode.workspace
+        .getConfiguration()
+        .get("editor.lineNumbers")}`,
+      5000
     );
   }
 }
