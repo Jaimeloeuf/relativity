@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import validateInput from "./validateInput";
 import parseInput from "./parseInput";
 import createNewPosition from "./createNewPosition";
-import lineHighlight from "./lineHighlight";
+import highlight from "./highlight";
 import deleteHighlight from "./deleteHighlight";
 
 /**
@@ -35,13 +35,7 @@ function newPeekline(editor: vscode.TextEditor) {
       charactersToJump
     );
 
-    // Ensure linesToJump is not 0 before highlighting to prevent highlighting current line.
-    if (linesToJump) {
-      // Show line highlight to let user preview the jump destination
-      editor.setDecorations(lineHighlight, [
-        new vscode.Range(newPosition, newPosition),
-      ]);
-    }
+    highlight(editor, linesToJump, charactersToJump, newPosition);
 
     // If new position is out of editor's top and bottom visible range
     // Move visible range to show new position in the center of the editor
