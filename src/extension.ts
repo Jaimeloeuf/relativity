@@ -54,7 +54,7 @@ export async function activate(context: vscode.ExtensionContext) {
       const { linesToJump, charactersToJump } = parseInput(input);
 
       // Create the new end position using linesToJump
-      const newPosition = createNewPosition(
+      const newPosition: vscode.Position = createNewPosition(
         editor,
         linesToJump,
         charactersToJump
@@ -108,7 +108,7 @@ export async function activate(context: vscode.ExtensionContext) {
       const { linesToJump, charactersToJump } = parseInput(input);
 
       // Create the new end position using linesToJump
-      const newPosition = createNewPosition(
+      const newPosition: vscode.Position = createNewPosition(
         editor,
         linesToJump,
         charactersToJump

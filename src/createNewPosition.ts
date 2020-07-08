@@ -7,7 +7,7 @@ function createNewPosition(
   editor: vscode.TextEditor,
   linesToJump: number,
   charactersToJump: number = 0
-) {
+): vscode.Position {
   // Use active position of selection instead of "anchor/start/end" to move based on current cursor line
   let newLine = editor.selection.active.line + linesToJump;
   // If newLine exceeds lower screen/document limit, vscode will just jump to last line, last character.

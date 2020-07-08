@@ -29,7 +29,11 @@ function newPeekline(editor: vscode.TextEditor) {
     const { linesToJump, charactersToJump } = parseInput(inputValue);
 
     // Create new position/jump destination from user's input
-    const newPosition = createNewPosition(editor, linesToJump, charactersToJump);
+    const newPosition: vscode.Position = createNewPosition(
+      editor,
+      linesToJump,
+      charactersToJump
+    );
 
     // Ensure linesToJump is not 0 before highlighting to prevent highlighting current line.
     if (linesToJump) {
