@@ -37,6 +37,7 @@
     "shortcuts",
     "relative",
     "goto",
+    "gotoNegative",
     "lines",
     "jump"
   ],
